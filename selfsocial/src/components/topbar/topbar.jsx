@@ -26,16 +26,37 @@ export default function Topbar() {
             </div>
         </div>
 
-        
+        <div className="topbarRight">
+
+            <div className="topbarLinks">
+                <span className="topbarLink">Homepage</span>
+                <span className="topbarLink">Timeline</span>
+            </div>
 
 
+            <div className="topbarIcons">
 
+                <div className="topbarIconItem">
+                    <PersonIcon />
+                    <span className="topbarIconBadge">1</span>
+                </div>
 
+                <div className="topbarIconItem">
+                    <ChatIcon />
+                    <span className="topbarIconBadge">2</span>
+                </div>
 
+                <div className="topbarIconItem">
+                    <NotificationsIcon />
+                    <span className="topbarIconBadge">1</span>
+                </div>
 
+            </div>
 
-
-
+            <Link to={`/profile/${user.username}`}>
+                <img src={user.profilePicture} alt="" className="topbarImg" />
+            </Link>
+           </div>
         </div>
     )
 
