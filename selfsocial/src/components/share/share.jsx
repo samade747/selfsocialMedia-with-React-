@@ -64,7 +64,35 @@ export default function Share() {
                     <input placeholder={"What's on your mind " + user.username + "?"} className="shareinput" ref={desc} />
                 </div>
                 <hr className="shareHr" />
-                
+                {file && (
+                    <div className="shareimgcontainer">   
+                    <img className="shareimg" src={URL.createObjectURL(file)} alt=""/>
+                    <div className="sharecancelimg" onClick={() => setfile(null)}>X</div>
+                    </div>                 
+                )}
+                <form className="sharebottom" onSubmit={handlesubmit}>
+            <div className="shareoptions">
+             <label htmlFor="file" className="shareoption">
+                <PermMediaIcon htmlColor="tomato" className="shareicon"/>
+                <span className="shareoptiontext">Photo or text</span>
+                <input style={{display:"none"}} type="file" id="file" accept="image/*" onChange={(e)=>setfile(e.target.files[0])}/>
+             </label >
+             <div className="shareoption">
+                <LabelIcon htmlColor="blue" className="shareicon"/>
+                <span className="shareoptiontext">Tag</span>
+             </div>
+             <div className="shareoption">
+                <RoomIcon htmlColor="green" className="shareicon"/>
+                <span className="shareoptiontext">Location</span>
+             </div>
+             <div className="shareoption">
+                <EmojiEmotionsIcon htmlColor="golden" className="shareicon"/>
+                <span className="shareoptiontext">Feelings</span>
+             </div>
+            </div>
+            <button type="submit" className="sharebutton">Share</button>
+            </form>
+                                
 
             </div>
         </div>
