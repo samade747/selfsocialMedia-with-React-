@@ -47,11 +47,32 @@ export default function Share() {
 
             // creating a new Post 
             try {
-                
+                await axios.post('http://localhost:8800/api/posts', newPost); // Creating a& Making a post req to the server
+                        window.location.reload(); // Reloading the page                 
+            } catch(error){
+                console.log(error) //  Logging any errors that occur during post creation
             }
 
         
     }
+
+    return(
+        <div className="share">
+            <div className="shareWrapper">
+                <div className="shareTop">
+                    <img src={user.profilePicture ? user.profilePicture : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"} alt="" className="shareProfileImg" />
+                    <input placeholder={"What's on your mind " + user.username + "?"} className="shareinput" ref={desc} />
+                </div>
+                <hr className="shareHr" />
+                
+
+            </div>
+        </div>
+
+
+    )
+
+
 
 
 
