@@ -74,6 +74,28 @@ const Homerightbar = () => {
 }
 
 
+const Profilerightbar = () => {
+    return (
+        <>
+        {user.username !== currentUser.username && (
+            <button className="rightbarFollowButton" onClick={handleclick}>
+                {followed ? "Unfollow" : "Follow"} {user.username}
+                {followed ? <RemoveIcon /> : <AddIcon />}
+             </button>   
+        )}
+        
+
+
+
+        
+        
+        
+        
+        </>
+
+    )
+}
+
 
 
 
