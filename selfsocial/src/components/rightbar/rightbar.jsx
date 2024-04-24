@@ -10,7 +10,7 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 
 export default function Rightbar({ user }) {
-    const [friends, setfriends] = useState([]);
+    const [friends, setfriends] = useState([])
     const { user: currentUser, dispatch } = useContext(AuthContext);
     const [followed, setfollowed] = useState(currentUser.followings.includes(user?._id));
 
@@ -31,7 +31,7 @@ export default function Rightbar({ user }) {
         setfollowed(!followed)
     }
     
-}
+
 
 useEffect(() => {
     setfollowed(currentUser.followings.includes(user?._id))
@@ -39,9 +39,57 @@ useEffect(() => {
 
 useEffect(() => {
     const getfriends = async () => {
-        
+        if (user?._id) {
+            try {
+                const res = await axios.get("http://localhost:8800/api/users/" + user?._id + "/friends");
+                setfriends(res.data);
+            } catch (err) {
+                console.log(err);
+            }
+        }
     }
+    getfriends()
+}, [user?._id])
 
-})
+
+const Homerightbar = () => {
+    return (
+       <>
+       <div className="birthdaycontainer">
+        <RedeemIcon className="birthdayicon" />
+        <span className="birthdaytext">
+            <b>Pola Foster</b> and <b>3 other friends</b> have a birthday today
+        </span>
+       </div>
+       <img className="rightbarad" src="assets/gift.png" alt=""/>
+       <h4 className="rightbartitle">Online Friends</h4>
+       <ul className="rightbarfriendlist">
+
+       {Dummydata.map((u) => (
+            <Online key={u.id} user={u} />
+       ))}
+       </ul>                            
+       </> 
+    )
+}
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
