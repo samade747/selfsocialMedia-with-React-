@@ -83,19 +83,48 @@ const Profilerightbar = () => {
                 {followed ? <RemoveIcon /> : <AddIcon />}
              </button>   
         )}
-        
+        <h4 className="rightbartitle">user informaton</h4>
+        <div className="rightbarInfo">
+            <div className="rightbarInfoItem">
+                <span className="rightbarInfoKey">City:</span>
+                <span className="rightbarInfoValue">{user.city}</span>
+            </div>
+            <div className="rightbarInfoItem">
+                <span className="rightbarInfoKey">From:</span>
+                <span className="rightbarInfoValue">{user.from}</span>
+            </div>
+            <div className="rightbarInfoItem">
+                <span className="rightbarInfoKey">Relationship:</span>
+                <span className="rightbarInfoValue"> {user.relationship === 1 ? "Single" : user.relationship === 2 ? "Married" : "-"}</span>                
+            </div>
+        </div>
 
-
-
-        
-        
-        
-        
-        </>
+        <h4 className="rightbartitle">User friends</h4>
+        <div className="rightbarFollowings">
+                {friends.map((f) => (
+                    <Link to={'/profile/' + f.username} key={f._id} style={{ textDecoration: 'none' }}>
+                        <div className="rightbarFollowing">
+                            <img src={f.profilePicture ? f.profilePicture : "assets/person/noAvatar.png"} alt="" className="rightbarFollowingImg" />
+                            <span className="rightbarFollowingName">{f.username}</span>
+                        </div>
+                            </Link>
+                    ))}
+                        </div>                   
+               
+                </>
 
     )
 }
 
+return(
+    <div className="rightbar">
+        <div className="rightbarWrapper">
+            {user ? <Profilerightbar /> : <Homerightbar />}
+        </div>
+    </div>
+)
+
+}
 
 
 
