@@ -16,12 +16,15 @@ function Post({post}) {// / This line defines a functional component named Post 
     const [user, setUser] = useState({}); // This line declares a state variable 'user' and initializes it with an empty object.
     const {user:currentuser} = useContext(AuthContext) // This line extracts the 'user' property from the 'AuthContext' and assigns it to the 'currentuser' variable.
 
-    useEffect(() => { // This line declares a useEffect hook, which runs after the component renders.
-        const fetchUser = async () => { // This line defines an asynchronous function 'fetchUser'.
-            try{
-                const res = await axios.get(`http://localhost:8800/api/user?username=${post.username}`) // // This line sends an HTTP GET request to fetch user data from the specified endpoint.
-                setUser(res.data) // This line updates the 'user' state variable with the data received from the HTTP response.
+    useEffect(()=>{ // This line declares a useEffect hook, which runs after the component renders.
+        setislike(post.likes.includes(currentuser._id)) // This line sets the 'islike' state based on whether the current user's ID is included in the 'likes' array of the post.
+    },[currentuser._id,post.likes]) // This line specifies the dependencies for the useEffect hook.
 
+    useEffect(() => { // This line declares a useEffect hook, which runs after the component renders.        
+        const fetchUser = async () => { // This line defines an asynchronous function 'fetchUser'.            try{
+            try{
+             const res = await axios.get(`http://localhost:8800/api/user?username=${post.username}`) // // This line sends an HTTP GET request to fetch user data from the specified endpoint.
+             setUser(res.data) // This line updates the 'user' state variable with the data received from the HTTP response.
             } catch(error) {
                 console.log(error) //  Logging any errors that occur during user data retrieval.                
             }
@@ -39,7 +42,8 @@ function Post({post}) {// / This line defines a functional component named Post 
             console.log(error)
         }
 
-        return(// This line marks the beginning of the return statement, indicating what the component should render.
+    }
+    return(// This line marks the beginning of the return statement, indicating what the component should render.
         <div className="post"> // This line renders a div element with the class name "post".
             <div className="postwrapper"> // This line renders a div element with the class name "postwrapper".
                  <div className="posttop"> // This line renders a div element with the class name "posttop".
@@ -72,3 +76,5 @@ function Post({post}) {// / This line defines a functional component named Post 
         </div> // This line marks the end of the outermost div element.
     )
 }
+
+export default Post //  This line exports the Post component as the default export.
